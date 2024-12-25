@@ -7,10 +7,10 @@ import AuthForm from "./component/LoginRegisterForm";
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
+      <Route path="/" element={<AuthForm />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       {/* <UnProtectedRoute path="/login" element={<AuthForm />} />
       <UnProtectedRoute path="/dashboard" element={<Dashboard />} /> */}
-      <Route path="/dashboard" element={<Dashboard />} />
-      {/* <Route path="/login" element={<AuthForm />} /> */}
     </Routes>
   );
 };

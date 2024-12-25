@@ -49,6 +49,7 @@ const AuthForm = () => {
           }
         })
         .catch((err) => {
+          console.log("Login Error: ", err);
           if (setLoginError && setIsAuth) {
             setLoginError(err);
             setIsAuth(false);
@@ -62,6 +63,7 @@ const AuthForm = () => {
           }
         })
         .catch((err) => {
+          console.log("Register Error: ", err);
           if (setRegError) setRegError(err);
         });
     }

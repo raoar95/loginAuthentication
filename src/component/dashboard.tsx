@@ -11,10 +11,8 @@ const Dashboard = () => {
     if (token) {
       logoutUser(token)
         .then((response) => {
-          console.log("response: ", response);
-
           if (response && response.status === 200) {
-            navigate("/login");
+            navigate("/");
           }
         })
         .catch((err) => {

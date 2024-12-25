@@ -1,5 +1,5 @@
 import { ApiError } from "./ErrorHandler";
-import { ITokens, useAuth } from "../state/context/AuthProviderContext";
+import { ITokens } from "../state/context/AuthProviderContext";
 
 /* const */
 import { SERVER_URL } from "../constant/constant";
