@@ -10,7 +10,7 @@ const AppRoutes: React.FC = () => {
       {/* <UnProtectedRoute path="/login" element={<AuthForm />} />
       <UnProtectedRoute path="/dashboard" element={<Dashboard />} /> */}
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/login" element={<AuthForm />} />
+      {/* <Route path="/login" element={<AuthForm />} /> */}
     </Routes>
   );
 };
