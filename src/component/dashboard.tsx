@@ -12,7 +12,7 @@ const Dashboard = () => {
       logoutUser(token)
         .then((response) => {
           if (response && response.status === 200) {
-            navigate("/");
+            navigate("/loginAuthentication");
           }
         })
         .catch((err) => {
