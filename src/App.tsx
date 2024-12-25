@@ -6,7 +6,6 @@ import AuthForm from "./component/LoginRegisterForm";
 function App() {
   return (
     <>
-      <AuthForm />
       <AppRoutes />
     </>
   );
