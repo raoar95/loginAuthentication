@@ -21,24 +21,22 @@ export interface IApiErrorResponse {
 }
 
 export interface AuthContextType {
-  userData?: IUserData | null;
-  setUserData?: React.Dispatch<React.SetStateAction<IUserData | null>>;
-  token?: ITokens | null;
-  setToken?: React.Dispatch<React.SetStateAction<ITokens | null>>;
-  isAuth?: boolean;
-  setIsAuth?: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoading?: boolean;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-  regResponseData?: IRegisterResponse | null;
-  setRegResponseData?: React.Dispatch<
+  userData: IUserData | null;
+  setUserData: React.Dispatch<React.SetStateAction<IUserData | null>>;
+  token: ITokens | null;
+  setToken: React.Dispatch<React.SetStateAction<ITokens | null>>;
+  isAuth: boolean;
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  regResponseData: IRegisterResponse | null;
+  setRegResponseData: React.Dispatch<
     React.SetStateAction<IRegisterResponse | null>
   >;
-  loginError?: IApiErrorResponse | null;
-  setLoginError?: React.Dispatch<
-    React.SetStateAction<IApiErrorResponse | null>
-  >;
-  regError?: IApiErrorResponse | null;
-  setRegError?: React.Dispatch<React.SetStateAction<IApiErrorResponse | null>>;
+  loginError: IApiErrorResponse | null;
+  setLoginError: React.Dispatch<React.SetStateAction<IApiErrorResponse | null>>;
+  regError: IApiErrorResponse | null;
+  setRegError: React.Dispatch<React.SetStateAction<IApiErrorResponse | null>>;
 }
 
 // Initial State
@@ -59,9 +57,7 @@ const defaultAuthContext: AuthContextType = {
   setRegError: () => {},
 };
 
-export const AuthContext = createContext<AuthContextType | null>(
-  defaultAuthContext
-);
+export const AuthContext = createContext<AuthContextType>(defaultAuthContext);
 
 const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState<IUserData | null>(null);

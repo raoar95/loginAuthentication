@@ -6,6 +6,10 @@ import { loginAuth, registerAuth } from "../service/api";
 /** context */
 import { AuthContextType, useAuth } from "../state/context/AuthProviderContext";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../state/context/ToastContextProvider";
+
+/** loader */
+import BlinkLoader from "./loader/Loader";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,20 +19,16 @@ const AuthForm = () => {
 
   const navigate = useNavigate();
 
+  const { toastSuccess, toastError } = useToast();
+
   const {
-    userData,
     setUserData,
-    token,
     setToken,
-    isAuth,
     setIsAuth,
     isLoading,
     setIsLoading,
-    regResponseData,
     setRegResponseData,
-    loginError,
     setLoginError,
-    regError,
     setRegError,
   } = useAuth() as AuthContextType;
 
@@ -38,33 +38,36 @@ const AuthForm = () => {
     if (isLogin) {
       loginAuth({ email, password })
         .then((data) => {
-          if (data && setUserData && setToken && setIsAuth) {
-            setUserData(data.data.user);
-            setToken({
-              accessToken: data.data.refreshToken,
-              refreshToken: data.data.accessToken,
-            });
-            setIsAuth(true);
-            navigate("/dashboard");
-          }
+          setUserData(data.data.user);
+          setToken({
+            accessToken: data.data.refreshToken,
+            refreshToken: data.data.accessToken,
+          });
+          setIsAuth(true);
+          setIsLoading(false);
+          toastSuccess(data.message);
+          navigate("/loginAuthentication/dashboard");
         })
         .catch((err) => {
+          setLoginError(err);
+          setIsAuth(false);
+          setIsLoading(false);
+          toastError(err.errorMessage);
           console.log("Login Error: ", err);
-          if (setLoginError && setIsAuth) {
-            setLoginError(err);
-            setIsAuth(false);
-          }
         });
     } else {
       registerAuth({ fullName, email, password })
         .then((resData) => {
-          if (resData && setRegResponseData && setIsAuth) {
-            setRegResponseData(resData);
-          }
+          setIsLoading(false);
+          setRegResponseData(resData);
+          toastSuccess(resData.message);
+          navigate("/");
         })
         .catch((err) => {
+          setIsLoading(false);
+          setRegError(err);
+          toastError(err.errorMessage);
           console.log("Register Error: ", err);
-          if (setRegError) setRegError(err);
         });
     }
   };
@@ -114,8 +117,13 @@ const AuthForm = () => {
             className="auth-input"
           />
         </div>
-        <button type="submit" className="auth-button">
-          {isLogin ? "Login" : "Register"}
+        <button
+          type="submit"
+          className="auth-button"
+          onClick={() => setIsLoading(true)}
+        >
+          {!isLoading && (isLogin ? "Login" : "Register")}{" "}
+          {isLoading && <BlinkLoader />}
         </button>
       </form>
       <div className="auth-switch-mode">
