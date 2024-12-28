@@ -4,6 +4,7 @@ import { useAuth } from "../state/context/AuthProviderContext";
 import { useNavigate } from "react-router-dom";
 import BlinkLoader from "./loader/Loader";
 import { useToast } from "../state/context/ToastContextProvider";
+import "./dashboard.css";
 
 const Dashboard = () => {
   const { userData, token, isLoading, setIsLoading } = useAuth();
@@ -33,7 +34,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="dashboard-container">
       <h2 style={{ color: "#000" }}>{`${userData?.fullName}`} Dashboard</h2>
       <button onClick={() => handleLogout()}>
         {!isLoading && "Logout"} {isLoading && <BlinkLoader />}
