@@ -38,6 +38,7 @@ const AuthForm = () => {
     if (isLogin) {
       loginAuth({ email, password })
         .then((data) => {
+          localStorage.setItem("userData", JSON.stringify(data.data.user));
           setUserData(data.data.user);
           setToken({
             accessToken: data.data.refreshToken,
