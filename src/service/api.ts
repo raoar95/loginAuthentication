@@ -1,6 +1,6 @@
 /* utils */
-import tryCatchHandler from "../utils/tryCatchHandler";
-import { fetchHandler, responseHandler } from "../utils/apiHandler";
+import tryCatchHandler from "../utils/TryCatchHandler";
+import { fetchHandler, responseHandler } from "../utils/ApiHandler";
 
 /* interface */
 import {
@@ -10,6 +10,7 @@ import {
   IPassword,
   IRegisterAuth,
 } from "../interface/user";
+
 import { ITokens } from "../context/authProvider.context";
 
 // ================================== Login Auth start ====================================== //
