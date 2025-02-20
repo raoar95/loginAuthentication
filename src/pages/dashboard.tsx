@@ -21,7 +21,7 @@ const Dashboard = () => {
 
   //   if (!user || !token) {
   //     toastError("Please Login to Access Dashboard");
-  //     navigate("/loginAuthentication/");
+  //     navigate("/");
   //   }
 
   //   setActiveUser(user);
@@ -37,7 +37,7 @@ const Dashboard = () => {
           setIsLoading(false);
           localStorage.removeItem("userData");
           toastSuccess(response.message);
-          navigate("/loginAuthentication/");
+          navigate("/");
         }
       })
       .catch((err) => {

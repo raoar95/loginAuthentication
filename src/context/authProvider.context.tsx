@@ -64,7 +64,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       })
       .catch(() => {
         setIsAuth(false);
-        navigate("/loginAuthentication/");
+        navigate("/");
       });
   }, []);
 

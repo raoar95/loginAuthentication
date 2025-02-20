@@ -10,17 +10,10 @@ const AppRoutes: React.FC = () => {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Navigate to="/loginAuthentication/" />} />
-        <Route path="/loginAuthentication/dashboard" element={<Dashboard />} />
-        <Route path="/loginAuthentication/" element={<Login />} />
-        <Route
-          path="/loginAuthentication/verify-otp/:otpID"
-          element={<Login />}
-        />
-        <Route
-          path="/loginAuthentication/reset-password/:resetToken"
-          element={<Login />}
-        />
+        <Route path="/" element={<Login />} />
+        <Route path="/verify-otp/:otpID" element={<Login />} />
+        <Route path="/reset-password/:resetToken" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </AuthProvider>
   );
