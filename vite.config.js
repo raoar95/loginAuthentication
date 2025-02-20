@@ -5,8 +5,6 @@ export default defineConfig({
   base: "/",
   plugins: [react()],
   build: {
-    outDir: "dist", // Ensure output directory is correct
-    emptyOutDir: true, // Clean old builds
-    target: "esnext", // Optimize for latest browsers
+    outDir: "dist",
   },
 });
