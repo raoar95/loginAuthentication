@@ -22,6 +22,11 @@
     left: 0;
     width: 0%;
     animation: toast 3.5s linear forwards;
+    animation-play-state: running;
+  }
+
+  &:hover::after {
+    animation-play-state: paused;
   }
 
   & .toast_icon {
@@ -56,6 +61,7 @@
   }
 }
 
+/* Success Toast  */
 .toast_container.success {
   & .toast_icon {
     color: forestgreen;
@@ -66,6 +72,7 @@
   }
 }
 
+/* Error Toast  */
 .toast_container.error {
   & .toast_icon {
     color: red;
@@ -114,7 +121,6 @@
 }
 
 /* Responsive  */
-
 @media only screen and (max-width: 440px) {
   .toast_container {
     max-width: 90vw;

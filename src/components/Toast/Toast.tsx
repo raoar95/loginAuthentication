@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./Toast.css";
+import React, { useEffect, useState, memo, useCallback } from "react";
+import "./Toast.scss";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdError } from "react-icons/md";
-
-import { IToast } from "../../state/context/ToastContextProvider";
+import { IToast } from "../../context/toastProvider.context";
 
 interface IToastProps extends IToast {
   setToast: React.Dispatch<React.SetStateAction<IToast>>;
@@ -14,32 +13,35 @@ const Toast = ({ isVisible, type, message, setToast }: IToastProps) => {
   const [toastVisible, setToastVisible] = useState(false);
 
   useEffect(() => {
-    if (isVisible) {
-      setTimeout(() => {
-        setToastVisible(true);
-      }, 50);
-      setTimeout(() => {
-        setToastVisible(false);
-      }, 3500);
-    }
+    if (!isVisible) return;
+
+    const showTimeout = setTimeout(() => setToastVisible(true), 50);
+    const hideTimeout = setTimeout(() => setToastVisible(false), 3500);
+
+    return () => {
+      clearTimeout(showTimeout);
+      clearTimeout(hideTimeout);
+    };
   }, [isVisible]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setCloseAnimation(true);
     setTimeout(() => {
       setToast({ isVisible: false, type: "", message: "" });
     }, 800);
-  };
+  }, [setToast]);
+
+  const toastType = type.toLowerCase();
 
   return (
     <div
-      className={`toast_container ${type.toLowerCase()} ${
+      className={`toast_container ${toastType} ${
         closeAnimation && "fade-out"
       } ${toastVisible ? "active" : ""}`}
     >
       <div className="toast_icon">
-        {type.toLowerCase() === "success" && <FaCheckCircle />}
-        {type.toLowerCase() === "error" && <MdError />}
+        {toastType === "success" && <FaCheckCircle />}
+        {toastType === "error" && <MdError />}
       </div>
       <div className="toast_content">
         <p className="toast_type">{type}</p>
@@ -52,4 +54,4 @@ const Toast = ({ isVisible, type, message, setToast }: IToastProps) => {
   );
 };
 
-export default Toast;
+export default memo(Toast);
