@@ -3,7 +3,7 @@ const tryCatchHandler = (
 ) => {
   return async (...args: any[]): Promise<any | any[]> => {
     try {
-      return await asyncFunction(...args);
+      return asyncFunction(...args);
     } catch (error) {
       throw error;
     }

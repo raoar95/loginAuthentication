@@ -1,0 +1,19 @@
+.otp_input_container {
+  width: max-content;
+  margin: 0 auto;
+
+  & .otp_input_wrapper {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  & .otp_digit {
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #2f8f1f;
+    text-align: center;
+    font-size: 16px;
+  }
+}

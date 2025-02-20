@@ -1,0 +1,246 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--text-font);
+  font-weight: 500;
+  scroll-behavior: smooth;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--primary-text-black-color);
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--head-font);
+  font-weight: 600;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/*===============
+-> Layout CLasses 
+================*/
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.wh-full {
+  width: 100%;
+  height: 100%;
+}
+
+.vw-full {
+  width: 100vw;
+}
+
+.vh-full {
+  width: 100vh;
+}
+
+.vwh-full {
+  width: 100vw;
+  height: 100vh;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/*==============
+-> Flex CLasses 
+===============*/
+
+.flex {
+  display: flex;
+}
+
+.flex-space,
+.flex-center,
+.flex-evenly,
+.flex-start,
+.flex-end {
+  align-items: center;
+}
+
+.flex-space {
+  justify-content: space-between;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-evenly {
+  justify-content: space-evenly;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.no-shrink {
+  flex-shrink: 0;
+}
+
+/*==============
+-> Grid CLasses 
+==============*/
+
+.grid {
+  display: grid;
+}
+
+.grid-center {
+  place-items: center;
+}
+
+/*=================
+-> General CLasses 
+=================*/
+
+.w-100 {
+  width: 100% !important;
+}
+
+.flow-hidden {
+  overflow: hidden;
+}
+
+.flow-scroll {
+  overflow: scroll;
+}
+
+.flow-auto {
+  overflow: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mg-auto {
+  margin: auto;
+}
+
+.mg-x-auto {
+  margin: 0 auto;
+}
+
+.mg-y-auto {
+  margin: auto 0;
+}
+
+/*==================
+-> Responsive Image  
+==================*/
+
+.img-res {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+}
+
+.bg-img-center {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.profile {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/*===============
+-> Button Classes 
+=================*/
+
+.myBtn {
+  width: 100%;
+  text-align: center;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--primary-black-bg-color);
+  color: var(--primary-bg-color);
+}
+
+/*========================
+-> Text Overflow Ellipsis  
+========================*/
+
+.ellipsis {
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.two-line-ellipsis {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

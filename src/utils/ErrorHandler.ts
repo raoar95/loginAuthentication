@@ -1,16 +1,16 @@
 class ApiError {
+  success: boolean;
   status: number;
   errorMessage: string;
-  data?: any;
 
   constructor(
+    success: boolean,
     status: number,
-    errorMessage: string = "Request failed",
-    data?: any
+    errorMessage: string = "Request failed"
   ) {
+    this.success = success;
     this.status = status;
     this.errorMessage = errorMessage;
-    this.data = data;
   }
 }
 

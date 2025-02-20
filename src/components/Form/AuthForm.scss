@@ -1,0 +1,53 @@
+.auth_form_container {
+  width: 90vw;
+  max-width: 400px;
+  height: max-content;
+  background: var(--primary-bg-color);
+  border-radius: 25px;
+  margin: 15px auto;
+  padding: 20px;
+  text-align: center;
+  z-index: 10;
+
+  & .form_head_container {
+    margin-bottom: 20px;
+
+    & h1 {
+      margin-bottom: 3px;
+      font-size: 30px;
+    }
+
+    & p {
+      font-size: 15px;
+      color: var(--text-dark-grey-color);
+    }
+  }
+
+  & .form_text {
+    font-size: 15px;
+    font-style: italic;
+    margin: 15px 0px 10px;
+    color: var(--text-dark-grey-color);
+
+    & .register_text {
+      font-size: 16px;
+      font-weight: 600;
+      font-style: normal;
+    }
+  }
+
+  & .input_submit {
+    border-radius: 6px;
+  }
+
+  & .otp_btn {
+    background-color: transparent;
+    color: var(--text-dark-grey-color);
+    border: 2px solid var(--text-dark-grey-color);
+
+    &:hover {
+      color: var(--primary-black-bg-color);
+      border-color: var(--primary-black-bg-color);
+    }
+  }
+}

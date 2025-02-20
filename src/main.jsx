@@ -1,19 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./main.css";
-import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./state/context/AuthProviderContext";
-import { ToastContextProvider } from "./state/context/ToastContextProvider";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+/* App */
+import App from "./App";
+
+/* Context */
+import { ToastContextProvider } from "./context/toastProvider.context";
+import { BrowserRouter } from "react-router-dom";
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <ToastContextProvider>
-          <App />
-        </ToastContextProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <ToastContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ToastContextProvider>
   </React.StrictMode>
 );

@@ -1,0 +1,103 @@
+.input,
+.icon_input_wrapper {
+  height: 40px;
+  border-radius: 6px;
+  border: 2px solid var(--border-grey-color);
+  outline: none;
+  padding: 5px 10px;
+  margin: 10px auto;
+  font-size: 15px;
+  color: var(--primary-text-black-color);
+}
+
+.input_wrapper {
+  width: 100%;
+  position: relative;
+  margin: 10px 0;
+
+  & .input {
+    width: 100%;
+    display: block;
+  }
+
+  & .label {
+    font-size: 18px;
+  }
+
+  & .eye_icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: var(--primary-text-black-color);
+    cursor: pointer;
+    z-index: 25;
+  }
+}
+
+.icon_input_wrapper {
+  position: relative;
+  height: 50px;
+
+  &:focus-within {
+    border-color: var(--primary-text-black-color);
+  }
+
+  & .icon,
+  .input_label {
+    position: absolute;
+  }
+
+  & .icon {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: var(--primary-text-black-color);
+  }
+
+  & .eye_icon {
+    right: 10px;
+    cursor: pointer;
+    z-index: 25;
+  }
+
+  & .input_label {
+    top: 12px;
+    left: 50px;
+    color: var(--text-light-grey-color);
+    cursor: text;
+    font-family: var(--text-font);
+    transition: all 0.3s ease;
+  }
+
+  & .icon_input {
+    position: relative;
+    width: 92%;
+    border: none;
+    outline: none;
+    border-left: 2px solid var(--border-grey-color);
+    padding: 10px 0 0 10px;
+    margin-left: 30px;
+    line-height: 25px;
+    background: transparent;
+    font-size: 15px;
+    z-index: 2;
+
+    &:focus {
+      border-color: var(--primary-text-black-color);
+    }
+  }
+
+  & .icon_input:focus + .input_label,
+  .input_label.top {
+    top: 3px;
+    font-size: 12px;
+    color: var(--text-dark-grey-color);
+  }
+
+  & .normal_icon_input {
+    padding-top: 0px;
+    line-height: 35px;
+  }
+}

@@ -1,5 +1,15 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import Toast from "../../component/toast/Toast";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  lazy,
+  Suspense,
+  ReactNode,
+  useMemo,
+} from "react";
+
+const Toast = lazy(() => import("../components/Toast/Toast"));
 
 /** interface */
 export interface IToast {
@@ -13,9 +23,9 @@ interface IToastContext {
   toastError: (message: string) => void;
 }
 
-const ToastContext = createContext<IToastContext | undefined>(undefined);
+const ToastContext = createContext<IToastContext | null>(null);
 
-const ToastContextProvider = ({ children }) => {
+const ToastContextProvider = ({ children }: { children: ReactNode }) => {
   const [toast, setToast] = useState({
     isVisible: false,
     type: "",
@@ -24,41 +34,41 @@ const ToastContextProvider = ({ children }) => {
 
   const [isVisible, setIsVisible] = useState(false);
 
-  // Updating `toast visibility` for `Toast` component.
+  // Auto Close Toast after 4 seconds
   useEffect(() => {
     setIsVisible(toast.isVisible);
+    if (toast.isVisible) {
+      const timer = setTimeout(() => {
+        setToast({ isVisible: false, type: "", message: "" });
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
   }, [toast.isVisible]);
-
-  // Auto Close after 4 seconds
-  const closeToast = (): void => {
-    setTimeout(
-      () => setToast({ isVisible: false, type: "", message: "" }),
-      4000
-    );
-  };
 
   // Success Toast
   const toastSuccess = (message: string): void => {
     setToast({ isVisible: true, type: "Success", message });
-    closeToast();
   };
 
   // Error Toast
   const toastError = (message: string): void => {
     setToast({ isVisible: true, type: "Error", message });
-    closeToast();
   };
 
+  const toastActions = useMemo(() => ({ toastSuccess, toastError }), []);
+
   return (
-    <ToastContext.Provider value={{ toastSuccess, toastError }}>
+    <ToastContext.Provider value={toastActions}>
       {children}
       {toast.isVisible && (
-        <Toast
-          isVisible={isVisible}
-          type={toast.type}
-          message={toast.message}
-          setToast={setToast}
-        />
+        <Suspense fallback={null}>
+          <Toast
+            isVisible={toast.isVisible}
+            type={toast.type}
+            message={toast.message}
+            setToast={setToast}
+          />
+        </Suspense>
       )}
     </ToastContext.Provider>
   );

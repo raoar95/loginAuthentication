@@ -1,17 +1,25 @@
-export interface ILoginAuth {
+export interface IEmailRequest {
   email: string;
+}
+
+export interface IPassword {
   password: string;
 }
 
+export interface ILoginAuth extends IEmailRequest, IPassword {}
+
 export interface IRegisterAuth extends ILoginAuth {
   name: string;
+}
+
+export interface IOtp {
+  otp: string;
 }
 
 export interface IUserData {
   _id: string;
   email: string;
   fullName: string;
-  watchHistory: string[];
   createdAt: string;
   updatedAt: string;
   __v: number;

@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+:root {
+  /* Fonts  */
+  --head-font: "Fredoka", serif;
+  --text-font: "Lato", serif;
+
+  /* Colors */
+  --primary-bg-color: whitesmoke;
+  --primary-black-bg-color: #262d35;
+  --primary-grey-bg-color: #f5f5f6;
+  --primary-orange-bg-color: #ffe9ca;
+  --primary-dark-orange-bg-color: #efd3ab;
+  --primary-blue-bg-color: #e1f0f4;
+  --primary-purple-bg-color: #ede1f4;
+  --primary-heading-text-color: #112f37;
+  --primary-text-black-color: #2e3334;
+  --text-dark-grey-color: #686868;
+  --text-light-grey-color: #a2a2a2;
+  --border-grey-color: #e0e0e0;
+}
