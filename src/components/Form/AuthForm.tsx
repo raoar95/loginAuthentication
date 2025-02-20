@@ -69,14 +69,14 @@ const AuthForm: React.FC = () => {
             setIsAuth(true);
             setUserData(data.data.user);
             toastSuccess(data.message);
-            navigate("/loginAuthentication/dashboard");
+            navigate("/dashboard");
           });
         }
 
         if (isActiveId === "otpLogin") {
           await emailOtpLogin({ email }).then((data) => {
             toastSuccess(data.message);
-            navigate("/loginAuthentication/verify-otp/otpLogin");
+            navigate("/verify-otp/otpLogin");
           });
         }
 
@@ -91,21 +91,21 @@ const AuthForm: React.FC = () => {
             setIsAuth(true);
             setUserData(data.data.user);
             toastSuccess(data.message);
-            navigate("/loginAuthentication/login");
+            navigate("/login");
           });
         }
 
         if (isActiveId === "forgotEmailRequest") {
           await requestResetEmail({ email }).then((data) => {
             toastSuccess(data.message);
-            navigate("/loginAuthentication/verify-otp/reset");
+            navigate("/verify-otp/reset");
           });
         }
 
         if (isActiveId === "resetPassword") {
           await resetPassword({ password }).then((data) => {
             toastSuccess(data.message);
-            navigate("/loginAuthentication/");
+            navigate("/");
           });
         }
       } catch (err: any) {
