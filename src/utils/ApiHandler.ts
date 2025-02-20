@@ -1,4 +1,4 @@
-import { ApiError } from "./errorHandler";
+import { ApiError } from "./ErrorHandler";
 import { ITokens } from "../context/authProvider.context";
 
 /* constant */
