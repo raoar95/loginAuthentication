@@ -1,9 +1,11 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 /* Component */
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
+
+/* Context */
 import { AuthProvider } from "./context/authProvider.context";
 
 const AppRoutes: React.FC = () => {
