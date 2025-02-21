@@ -36,6 +36,7 @@ export interface AuthContextType {
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
   userData: IUserData | null;
   setUserData: React.Dispatch<React.SetStateAction<IUserData | null>>;
+  gettingUserData: boolean;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -46,6 +47,7 @@ const defaultAuthContext: AuthContextType = {
   setIsAuth: () => {},
   userData: null,
   setUserData: () => {},
+  gettingUserData: false,
   isLoading: false,
   setIsLoading: () => {},
 };
@@ -55,6 +57,7 @@ export const AuthContext = createContext<AuthContextType>(defaultAuthContext);
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUserData | null>(null);
+  const [gettingUserData, setGettingUserData] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -62,20 +65,23 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
 
   const getAuthState = useCallback(async () => {
-    await isUserAuth()
-      .then((data) => {
+    setGettingUserData(true);
+    try {
+      await isUserAuth().then((data) => {
         setIsAuth(true);
         setUserData(data.data);
-      })
-      .catch(() => {
-        setIsAuth(false);
-        navigate("/");
       });
-  }, [location.pathname]);
+    } catch (error) {
+      setIsAuth(false);
+      navigate("/");
+    } finally {
+      setGettingUserData(false);
+    }
+  }, []);
 
   useEffect(() => {
     getAuthState();
-  }, []);
+  }, [location.pathname]);
 
   const contextValue = useMemo(
     () => ({
@@ -83,6 +89,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setIsAuth,
       userData,
       setUserData,
+      gettingUserData,
       isLoading,
       setIsLoading,
     }),
