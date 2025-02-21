@@ -111,8 +111,8 @@ const OtpInput = ({ size, otpId }: IOtpSubmit) => {
       try {
         if (otpId === "reset") {
           await verifyResetOtp({ otp: inputOtp }).then((data) => {
-            navigate(`/reset-password/${randomText}`);
             toastSuccess(data.message);
+            navigate(`/reset-password/${randomText}`);
           });
         }
 
@@ -121,15 +121,16 @@ const OtpInput = ({ size, otpId }: IOtpSubmit) => {
             setIsAuth(true);
             setUserData(data.data.user);
             setIsLoading(false);
-            toastError(data.message);
+            toastSuccess(data.message);
             navigate("/dashboard");
           });
         }
       } catch (err) {
+        setIsAuth(false);
         toastError(err.errorMessage);
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     },
     [otp]
   );

@@ -6,11 +6,14 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { IUserData } from "../interface/user";
+
+import { useNavigate, useLocation } from "react-router";
+
+/* Services */
 import { isUserAuth } from "../service/api";
-import { useNavigate } from "react-router";
 
 /* Interface */
+import { IUserData } from "../interface/user";
 export interface ITokens {
   accessToken: string;
   refreshToken: string;
@@ -56,6 +59,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   const getAuthState = useCallback(async () => {
     await isUserAuth()
       .then((data) => {
@@ -66,7 +71,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setIsAuth(false);
         navigate("/");
       });
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     getAuthState();

@@ -14,36 +14,18 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
-  // Check if user exist
-  // useEffect(() => {
-  //   const userData = localStorage.getItem("userData");
-  //   const user = userData ? JSON.parse(userData) : null;
-
-  //   if (!user || !token) {
-  //     toastError("Please Login to Access Dashboard");
-  //     navigate("/");
-  //   }
-
-  //   setActiveUser(user);
-  // }, []);
-
   const handleLogout = async () => {
     setIsLoading(true);
 
     await logoutUser()
       .then((response) => {
-        console.log("response");
-        if (response && response.status === 200) {
-          setIsLoading(false);
-          localStorage.removeItem("userData");
-          toastSuccess(response.message);
-          navigate("/");
-        }
+        setIsLoading(false);
+        toastSuccess(response.message);
+        navigate("/");
       })
       .catch((err) => {
         setIsLoading(false);
         toastError(err.errorMessage);
-        console.error("Logout Error:", err);
       });
   };
 
@@ -58,5 +40,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-// {`${user?.fullName}`}
