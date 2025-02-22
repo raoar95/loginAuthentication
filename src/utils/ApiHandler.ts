@@ -26,9 +26,9 @@ const fetchHandler = ({
   };
 
   // Add Authorization token if exists
-  if (token) {
-    headers["Authorization"] = `Bearer ${token.refreshToken}`;
-  }
+  // if (token) {
+  //   headers["Authorization"] = `Bearer ${token.refreshToken}`;
+  // }
 
   return fetch(`${SERVER_URL}${endpoint}`, {
     method,

@@ -6,11 +6,14 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { IUserData } from "../interface/user";
+
+import { useNavigate, useLocation } from "react-router";
+
+/* Services */
 import { isUserAuth } from "../service/api";
-import { useNavigate } from "react-router";
 
 /* Interface */
+import { IUserData } from "../interface/user";
 export interface ITokens {
   accessToken: string;
   refreshToken: string;
@@ -33,6 +36,7 @@ export interface AuthContextType {
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
   userData: IUserData | null;
   setUserData: React.Dispatch<React.SetStateAction<IUserData | null>>;
+  gettingUserData: boolean;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -43,6 +47,7 @@ const defaultAuthContext: AuthContextType = {
   setIsAuth: () => {},
   userData: null,
   setUserData: () => {},
+  gettingUserData: false,
   isLoading: false,
   setIsLoading: () => {},
 };
@@ -52,25 +57,31 @@ export const AuthContext = createContext<AuthContextType>(defaultAuthContext);
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUserData | null>(null);
+  const [gettingUserData, setGettingUserData] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   const getAuthState = useCallback(async () => {
-    await isUserAuth()
-      .then((data) => {
+    setGettingUserData(true);
+    try {
+      await isUserAuth().then((data) => {
         setIsAuth(true);
         setUserData(data.data);
-      })
-      .catch(() => {
-        setIsAuth(false);
-        navigate("/");
       });
+    } catch (error) {
+      setIsAuth(false);
+      navigate("/");
+    } finally {
+      setGettingUserData(false);
+    }
   }, []);
 
   useEffect(() => {
     getAuthState();
-  }, []);
+  }, [location.pathname]);
 
   const contextValue = useMemo(
     () => ({
@@ -78,6 +89,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setIsAuth,
       userData,
       setUserData,
+      gettingUserData,
       isLoading,
       setIsLoading,
     }),
